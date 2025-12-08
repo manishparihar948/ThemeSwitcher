@@ -2,8 +2,19 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+# Xcode build artifacts
+DerivedData/
+build/
+
 ## User settings
 xcuserdata/
+xcuserstate
+
+# macOS system files
+.DS_Store
+
+# API keys or config files
+
 
 ## Obj-C/Swift specific
 *.hmap

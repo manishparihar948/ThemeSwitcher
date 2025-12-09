@@ -23,17 +23,21 @@ jobs:
             ${{ runner.os }}-deriveddata-
 
       - name: Build
+        working-directory: ./ThemeSwitcher
         run: |
           xcodebuild \
+            -project ThemeSwitcher.xcodeproj \
             -scheme ThemeSwitcher \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest' \
             build-for-testing
 
       - name: Test
+        working-directory: ./ThemeSwitcher
         run: |
           xcodebuild \
-            test-without-building \
+            -project ThemeSwitcher.xcodeproj \
             -scheme ThemeSwitcher \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest'
+            -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=latest' \
+            test-without-building

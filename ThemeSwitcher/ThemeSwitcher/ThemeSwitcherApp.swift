@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct ThemeSwitcherApp: App {
+    
+    @State private var themeManager = ThemeManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(themeManager)
         }
     }
 }

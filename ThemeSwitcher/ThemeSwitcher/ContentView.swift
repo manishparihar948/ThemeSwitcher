@@ -8,17 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(ThemeManager.self) private var themeManager: ThemeManager
+    
+    @State private var showThemes = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            Rectangle().fill(themeManager.selectedTheme.gradient)
+            VStack {
+                Button("Show Themes") {
+                    showThemes.toggle()
+                }
+                .font(.system(.headline,
+                              design: .rounded,
+                              weight: .bold))
+                .buttonStyle(.bordered)
+                .foregroundStyle(.white)
+                .controlSize(.large)
+                .buttonBorderShape(.roundedRectangle)
+            }
         }
-        .padding()
+        .animation(.bouncy, value: themeManager.selectedTheme)
+        .ignoresSafeArea()
+        .sheet(isPresented: $showThemes, content: {
+            ThemeSwitcherView()
+                .presentationDetents([.medium])
+        })
     }
 }
 
+
 #Preview {
     ContentView()
+        .environment(ThemeManager())
 }
